@@ -28,7 +28,7 @@ define(function() {
         }
       }
     
-    xhr.open('GET', url, async);
+    xhr.open(method, url, async);
     
     for (var header in headers)
       xhr.setRequestHeader(header, headers[header]);
