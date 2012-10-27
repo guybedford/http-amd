@@ -1,5 +1,8 @@
 {
   "volo": {
-    "main": "ajax"
+    "main": "rest"
+    "dependencies": {
+      "require-is": "guybedford/require-is"
+    }
   }
 }
