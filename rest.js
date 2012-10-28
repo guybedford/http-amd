@@ -1,3 +1,3 @@
-define(['is!client?ajax:node-http'], function(request) {
-  return request;
+define(['is!browser?./ajax:./node-http'], function(http) {
+  return http;
 });

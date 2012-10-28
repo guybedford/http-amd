@@ -9,8 +9,32 @@ define(function() {
   var progIds = ['Msxml2.XMLHTTP', 'Microsoft.XMLHTTP', 'Msxml2.XMLHTTP.4.0'];
   var XMLHttpRequest;
   
-  // the most general possible ajax function, all arguments required
+  ajax.headers = {};
+  
+  ajax.setHeader = function(header, value) {
+    this.headers[header] = value;
+  }
+  
+  // the most general possible ajax function
+  // callback, errback optional
+  // async optional (so API matches server version)
+  // headers optional
+  // everything else must be supplied
   ajax.send = function(method, url, headers, async, data, callback, errback) {
+    if (typeof headers != 'object') {
+      errback = callback;
+      callback = data;
+      data = async;
+      async = headers;
+      headers = {};
+    }
+    if (typeof async != 'boolean') {
+      errback = callback;
+      callback = data;
+      data = async;
+      async = true;
+    }
+    
     var xhr, i, progId;
     if (typeof XMLHttpRequest !== 'undefined')
       xhr = new XMLHttpRequest();
@@ -30,6 +54,8 @@ define(function() {
     
     xhr.open(method, url, async);
     
+    for (var header in this.headers)
+      xhr.setRequestHeader(header, this.headers[header]);
     for (var header in headers)
       xhr.setRequestHeader(header, headers[header]);
     
@@ -43,9 +69,10 @@ define(function() {
           //An http 4xx or 5xx error. Signal an error.
           err = new Error(url + ' HTTP status: ' + status);
           err.xhr = xhr;
-          errback(err);
+          if (errback)
+            errback(err);
         }
-        else
+        else if (callback)
           callback(xhr.responseText);
       }
     }
@@ -55,22 +82,16 @@ define(function() {
   
   //the convenient ajax functions
   ajax.get = function(url, headers, callback, errback) {
-    //headers argument optional
-    if (typeof headers == 'function') {
-      errback = callback;
-      callback = headers;
-      headers = {};
-    }
-    ajax.send('GET', url, headers, true, null, callback, errback);
+    ajax.send('GET', url, headers, null, callback, errback);
   }
-  ajax.post = function(url, data, headers, callback, errback) {
-    //headers argument optional
-    if (typeof headers == 'function') {
-      errback = callback;
-      callback = headers;
-      headers = {};
-    }
-    ajax.send('POST', url, headers, true, data, callback, errback);
+  ajax.post = function(url, headers, data, callback, errback) {
+    ajax.send('POST', url, headers, data, callback, errback);
+  }
+  ajax.put = function(url, headers, data, callback, errback) {
+    ajax.send('PUT', url, headers, data, callback, errback);
+  }
+  ajax.del = function(url, headers, callback, errback) {
+    ajax.send('DELETE', url, headers, null, callback, errback);
   }
   return ajax;
 });
