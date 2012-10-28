@@ -1,4 +1,6 @@
-define(['http', 'url'], function(http, urlParser) {
+var http = require.nodeRequire('http');
+var urlParser = require.nodeRequire('url');
+define(function() {
   return {    
     //headers, callback, errback optional
     send: function(method, url, headers, data, callback, errback) {
