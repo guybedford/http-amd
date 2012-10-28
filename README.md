@@ -22,7 +22,7 @@ If not using Volo, ensure you download [RequireIS](https://github.com/guybedford
   {
     map: {
       '*': {
-        'rest': 'rest/rest'
+        'http': 'rest/http'
       }
     }
   }
@@ -31,14 +31,14 @@ If not using Volo, ensure you download [RequireIS](https://github.com/guybedford
 API
 ---
 
-#### Rest API
+#### HTTP API
 
 ```javascript
-  rest.send(method, url, headers, data, callback, errback);
-  rest.get(url, headers, callback, errback);
-  rest.post(url, headers, data, callback, errback);
-  rest.put(url, headers, data, callback, errback);
-  rest.del(url, headers, callback, errback);
+  http.send(method, url, headers, data, callback, errback);
+  http.get(url, headers, callback, errback);
+  http.post(url, headers, data, callback, errback);
+  http.put(url, headers, data, callback, errback);
+  http.del(url, headers, callback, errback);
   
   data is a string
   callback has the response string as its argument
@@ -69,8 +69,8 @@ Example
 ---
 
 ```javascript
-  define(['rest'], function(rest) {
-    rest.get('local-service/api', function(response) {
+  define(['rest/http'], function(http) {
+    http.get('local-service/api', function(response) {
       //do something with the response
     }, function(err) {
       //do something with the error
