@@ -1,7 +1,5 @@
 {
   "volo": {
-    "main": "rest",
-    "type": "directory",
     "dependencies": {
       "require-is": "guybedford/require-is"
     }

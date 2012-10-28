@@ -1,10 +1,5 @@
 define(['http', 'url'], function(http, urlParser) {
-  return {
-    headers: {},
-    setHeader: function(header, value) {
-      this.headers[header] = value;
-    },
-    
+  return {    
     //headers, callback, errback optional
     send: function(method, url, headers, data, callback, errback) {
       if (typeof headers != 'object') {
@@ -17,8 +12,6 @@ define(['http', 'url'], function(http, urlParser) {
       var requestOptions = urlParser.parse(url);
       
       requestOptions.headers = headers;
-      for (var header in this.headers)
-        requestOptions.headers[header] = this.headers[header];
       requestOptions.headers['Content-Length'] = str_data != undefined ? str_data.length : 0
       
       requestOptions.method = method;
@@ -30,16 +23,8 @@ define(['http', 'url'], function(http, urlParser) {
           _data.push(chunk);
         });
         _res.on('end', function() {
-          try {
-            _data = JSON.parse(_data.join(''));
-          }
-          catch (e) {
-            if (errback)
-              errback('Unable to parse JSON response.');
-            return;
-          }
           if (callback)
-            callback(_data);
+            callback(_data.join(''));
         });
       });
       if (errback)

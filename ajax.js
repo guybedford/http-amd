@@ -9,12 +9,6 @@ define(function() {
   var progIds = ['Msxml2.XMLHTTP', 'Microsoft.XMLHTTP', 'Msxml2.XMLHTTP.4.0'];
   var XMLHttpRequest;
   
-  ajax.headers = {};
-  
-  ajax.setHeader = function(header, value) {
-    this.headers[header] = value;
-  }
-  
   // the most general possible ajax function
   // callback, errback optional
   // async optional (so API matches server version)
@@ -53,9 +47,7 @@ define(function() {
       }
     
     xhr.open(method, url, async);
-    
-    for (var header in this.headers)
-      xhr.setRequestHeader(header, this.headers[header]);
+
     for (var header in headers)
       xhr.setRequestHeader(header, headers[header]);
     
