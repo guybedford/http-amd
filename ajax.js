@@ -7,7 +7,6 @@ define(function() {
   
   /* XHR code - copied from RequireJS text plugin */
   var progIds = ['Msxml2.XMLHTTP', 'Microsoft.XMLHTTP', 'Msxml2.XMLHTTP.4.0'];
-  var XMLHttpRequest;
   
   // the most general possible ajax function
   // callback, errback optional
@@ -45,7 +44,6 @@ define(function() {
           break;
         }
       }
-    
     xhr.open(method, url, async);
 
     for (var header in headers)

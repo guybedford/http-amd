@@ -4,7 +4,7 @@ define(['is!browser?./ajax:./node-http'], function(http) {
   return {
     send: function(method, url, headers, data, callback, errback) {
       //headers argument optional
-      if (typeof headers != 'function') {
+      if (typeof headers != 'object') {
         errback = callback;
         callback = headers;
         headers = {};

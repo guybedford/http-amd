@@ -14,7 +14,7 @@ define(function() {
       var requestOptions = urlParser.parse(url);
       
       requestOptions.headers = headers;
-      requestOptions.headers['Content-Length'] = str_data != undefined ? str_data.length : 0
+      requestOptions.headers['Content-Length'] = data != undefined ? data.length : 0
       
       requestOptions.method = method;
       
@@ -34,6 +34,7 @@ define(function() {
       _req.end(data);
     },
     get: function(url, headers, callback, errback) {
+      console.log(arguments.length);
       this.send('GET', url, headers, null, callback, errback);
     },
     post: function(url, headers, data, callback, errback) {
