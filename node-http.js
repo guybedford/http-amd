@@ -34,7 +34,6 @@ define(function() {
       _req.end(data);
     },
     get: function(url, headers, callback, errback) {
-      console.log(arguments.length);
       this.send('GET', url, headers, null, callback, errback);
     },
     post: function(url, headers, data, callback, errback) {

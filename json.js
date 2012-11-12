@@ -19,15 +19,18 @@ define(['is!browser?./ajax:./node-http'], function(http) {
       for (var header in headers)
         _headers[header] = headers[header];
       
-      _headers.contentType = 'application/json; charset=utf-8';
+      _headers['Content-Type'] = 'application/json; charset=utf-8';
       _headers.accept = 'application/json';
       
       http.send(method, url, _headers, JSON.stringify(data), callback ? function(data) {
         try {
-          callback(JSON.parse(data));
+          callback(data ? JSON.parse(data) : null);
         }
         catch (e) {
-          errback('Unable to parse JSON');
+          if (errback)
+            errback(e);
+          else
+            throw(e);
         }
       } : null, errback);
     },
