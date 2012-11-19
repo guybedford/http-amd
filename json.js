@@ -1,6 +1,6 @@
 //service wrapper for JSON service requests to work both client & server side
 //takes data as a javascript object, sends with application/json, and accept header for application/json, including response parsing.
-define(['is!browser?./ajax:./node-http'], function(http) {
+define(['is!browser?./ajax:./node-http', 'json/json'], function(http, JSON) {
   return {
     send: function(method, url, headers, data, callback, errback) {
       //headers argument optional
