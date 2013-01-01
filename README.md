@@ -1,7 +1,7 @@
-REST
+http-AMD
 ====
 
-A RequireJS module to allow for REST services and calls both on the client and server side.
+A RequireJS module to allow for HTTP services and calls both on the client and server side.
 
 Additionally, comes with a basic JSON request API for sending and receiving JSON both client and server side.
 
@@ -13,7 +13,7 @@ Install
 ---
 
 ```
-volo add guybedford/rest
+volo add guybedford/http-amd
 ```
 
 If not using Volo, ensure you download [RequireIS](https://github.com/guybedford/require-is) as well. This allows the conditional server / client code loading.
@@ -22,7 +22,7 @@ If not using Volo, ensure you download [RequireIS](https://github.com/guybedford
   {
     map: {
       '*': {
-        'http': 'rest/http'
+        'http': 'http-amd/http'
       }
     }
   }
@@ -47,7 +47,7 @@ API
 
 #### JSON API
 
-Located at `'rest/json'`. Automatically includes the headers:
+Located at `'http-amd/json'`. Automatically includes the headers:
 
    `Content-Type: application/json; charset=utf-8`
    `accept: application/json`
@@ -69,7 +69,7 @@ Example
 ---
 
 ```javascript
-  define(['rest/http'], function(http) {
+  define(['http-amd/http'], function(http) {
     http.get('local-service/api', function(response) {
       //do something with the response
     }, function(err) {
