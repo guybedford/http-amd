@@ -1,5 +1,8 @@
 {
   "name": "http-amd",
   "version": "0.0.1",
-  "main": "./http"
+  "main": "./http",
+  "dependencies": {
+    "json": "guybedford/json#0.0.1"
+  }
 }
