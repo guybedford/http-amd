@@ -4,9 +4,10 @@ define(['is!browser?./ajax:./node-http', 'json/json'], function(http, JSON) {
   return {
     send: function(method, url, headers, data, callback, errback) {
       //headers argument optional
-      if (typeof headers != 'object') {
+      if (typeof data != 'object') {
         errback = callback;
-        callback = headers;
+        callback = data;
+        data = headers;
         headers = {};
       }
       //data optional
