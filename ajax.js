@@ -55,12 +55,10 @@ define(function() {
       //visible via console output in the browser.
       if (xhr.readyState === 4) {
         status = xhr.status;
-        if (status > 399 && status < 600) {
+        if ((status > 399 && status < 600) || status == 400) {
           //An http 4xx or 5xx error. Signal an error.
-          err = new Error(url + ' HTTP status: ' + status);
-          err.xhr = xhr;
           if (errback)
-            errback(err);
+            errback(xhr);
         }
         else if (callback)
           callback(xhr.responseText);
