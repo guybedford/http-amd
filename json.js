@@ -33,7 +33,14 @@ define(['is!browser?./ajax:./node-http', 'json/json'], function(http, JSON) {
           else
             throw(e);
         }
-      } : null, errback);
+      } : null, function(xhr) {
+        if (xhr.response)
+          try {
+            xhr.response = JSON.parse(xhr.response) : null;
+          }
+          catch(e) {}
+        errback(xhr);
+      });
     },
     post: function(url, headers, data, callback, errback) {
       this.send('POST', url, headers, data, callback, errback);
