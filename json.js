@@ -36,7 +36,7 @@ define(['is!browser?./ajax:./node-http', 'json/json'], function(http, JSON) {
       } : null, function(xhr) {
         if (xhr.response)
           try {
-            xhr.response = JSON.parse(xhr.response) : null;
+            xhr.response = JSON.parse(xhr.response) || null;
           }
           catch(e) {}
         errback(xhr);
